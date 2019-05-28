@@ -3,6 +3,7 @@ import { SharedService } from '../shared/services/shared.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { of } from 'rxjs';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-product-details',
@@ -23,8 +24,12 @@ export class ProductDetailsComponent implements OnInit {
   totalPrice;
   selectedBase;
   totalSum=0;
-  constructor(private _SharedService:SharedService,private _Router:Router,private route:ActivatedRoute,private _FormBuilder: FormBuilder) { 
-    
+  enableAdd=false;
+  private readonly notifier: NotifierService;
+
+  constructor(_NotifierService: NotifierService,private _SharedService:SharedService,private _Router:Router,private route:ActivatedRoute,private _FormBuilder: FormBuilder) { 
+    this.notifier = _NotifierService;
+
     this.route.params.subscribe(params => { this.productId = params['id']; 
     this._SharedService.productsList.forEach(product => {
       if(product.product_id==this.productId)
@@ -84,7 +89,9 @@ submit() {
     .map((v, i) => v ? this.toppingOrders[i]: null)
     .filter(v => v !== null);
   localStorage.setItem('base',JSON.stringify(this.selectedBase))
-  localStorage.setItem('toppings',JSON.stringify(selectedToppingsOptions,))
+  localStorage.setItem('toppings',JSON.stringify(selectedToppingsOptions,));
+  this.notifier.notify( 'success', 'You are awesome! I mean it!' );
+
   this._Router.navigate(["order-details"]);
 }
  minSelectedToppingsCheckboxes(min = 0) {
@@ -94,13 +101,16 @@ submit() {
       .reduce((prev, next) => next ? prev + next : prev, 0);
     if(totalSelected>2)
         var max =true
-    return totalSelected >= min && this.selectedRequired && !max  ? null : { required: true };
+    return totalSelected >= min && this.selectedRequired && !max ||this.enableAdd ? null : { required: true };
   };
 
   return validator;
 }
 
   ngOnInit() {
+    if(!this.selectedProduct.base.options||!this.selectedProduct.toppings){
+       this.enableAdd=true
+    }
     if(this.selectedProduct.base.options&&this.selectedProduct.toppings)
     this.totalPrice=this.selectedProduct.price_net+(this.selectedProduct.base.options[this.selectedProduct.base.options.length-1]).price+(this.selectedProduct.toppings.options[0]).price;
   }

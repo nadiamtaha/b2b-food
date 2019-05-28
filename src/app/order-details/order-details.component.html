@@ -1,6 +1,7 @@
 <div class="container product-container py-3">
     <h3 class="title w-100 pb-2 mb-2">{{'Thanks for your order'|translate}}</h3>
-  
+     <div *ngIf="baseOrder||topping">
+
       <div class="row">
           <div class="col-sm-3 ">
             1-  {{'Your base choice'|translate}}
@@ -23,6 +24,7 @@
           </div>
      
       </div>
-          
+    </div>
+      
   
   </div>

@@ -14,6 +14,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { NotifierModule } from 'angular-notifier';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NotifierModule,
     ReactiveFormsModule, TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
