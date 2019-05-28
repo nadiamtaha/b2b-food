@@ -1,0 +1,49 @@
+<section class="products">
+  <div class="container">
+      <h3 class="title w-100 pb-2 mb-5">{{'Hot' | translate}}</h3>
+ 
+      <div *ngFor="let product of products" class="col-sm-12 product p-4 my-3">
+        <div class="row my-3">
+            <div class="col-sm-4 food-img my-2">
+                <img [src]="product.Product_image" class="img-fluid w-100">
+            </div>
+            <div class="col-sm-8">
+              <div class="row title-price mb-3">
+                <div class="col-sm-8 food-title">
+                    {{product.product | translate}}
+                </div>
+                <div class="col-sm-4 food-price text-right">
+                  {{'currency'| translate}} {{product.price}} {{'Per head'| translate}}
+
+                </div>
+              
+              </div>
+              <div class="row min-vat  mb-3">
+                  <div class="col-md-8 food-min-order">
+                      {{'Minimum order'| translate }}: 1
+                  </div>
+                  <div class="col-md-4 food-plus-vat text-right">
+                     {{'Plus VAT'| translate}}
+                  </div>
+              </div>
+              <div class="row title-price  mb-3">
+                  <div class="col-md-12 food-min-order">
+                     {{product.product_description| translate}}
+                  </div>
+                 
+              </div>
+            </div>
+        </div>
+        <div class="row my-3">
+            <!-- <div class="col-sm-6">
+                fdsf
+            </div> -->
+            <div class="col-sm-12">
+                <button (click)="viewProductDetails(product.product_id)" class="view-btn">{{'View' | translate}}</button>
+            </div>
+        </div>
+       
+      </div>
+      
+  </div>
+</section>

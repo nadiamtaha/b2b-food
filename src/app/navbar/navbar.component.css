@@ -1,0 +1,14 @@
+.navbar{
+    background: #000 !important;
+}
+.logo{
+    width:50px;
+    height: 40px;
+}
+
+.dropdown-item{
+    cursor: pointer;
+}
+.fa-shopping-cart{
+    color:#fff
+}

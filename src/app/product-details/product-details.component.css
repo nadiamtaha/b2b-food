@@ -1,0 +1,105 @@
+.product-container,.accordion-toggle{
+    color: rgb(100, 100, 100) !important;
+}
+.accordion-toggle{
+    color: #09c !important;
+}
+.checkbox-container {
+    /* width: 20%; */
+  position: relative;
+    display: block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.option{
+    margin-left: 40px
+}
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark,.radio-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+.radio-checkmark{
+  border-radius: 50%;
+}
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark,.checkbox-container:hover input ~ .radio-checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark,.checkbox-container input:checked ~ .radio-checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after,.radio-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after,.checkbox-container input:checked ~ .radio-checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after,.checkbox-container .radio-checkmark:after {
+  left: 10px;
+  top: 7px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.options-section{
+  border-bottom: 1px solid #ccc;
+}
+.comment{
+  border-radius: 3px;
+  border-color: #d6d3d3;
+  resize: none;
+  padding: 10px
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #acabab;
+  font-style: italic
+}
+.no-of-persons{
+  width:50px;
+  height: 42px;
+  text-align: center
+}
+
+.add-btn,.disabled{
+  background-color: #fe8c6d;
+  border: none;
+  color: #fff;
+  padding: 9px 15px;
+  float: right;
+  margin: 0 10px
+}
+.disabled{
+  color: #fff;
+  background-color: #cecccc;
+}

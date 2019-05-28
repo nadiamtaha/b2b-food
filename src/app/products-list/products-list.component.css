@@ -1,0 +1,36 @@
+.products{
+    height: 400px;
+    padding: .5rem 1rem;
+}
+.products .title{
+    color:rgb(134, 134, 134);
+    border-bottom: solid 1px #09c
+    /* #da6850 */
+}
+.products .product{
+    background-color: #fff;
+    box-shadow:  1px 1px 2px 2px rgb(218, 216, 216);
+
+}
+.title-price{
+    color: #8b8b8b;
+    font-weight: 800
+}
+.min-vat{
+    color:#ccc;
+
+}
+
+.food-img img{
+    height: 130px;
+}
+.view-btn{
+    background-color: #fe8c6d;
+    border: none;
+    color: #fff;
+    padding: 15px 25px;
+    float: right;
+}
+/* .product div{
+    float: left;
+} */

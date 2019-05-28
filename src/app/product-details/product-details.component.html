@@ -1,0 +1,134 @@
+<div class="container product-container py-3">
+  <h3 class="title w-100 pb-2 mb-2">{{selectedProduct.product|translate}}</h3>
+
+    <div class="row">
+        <div class="col-sm-3 food-img my-2">
+            <img [src]="selectedProduct.Product_image" class="img-fluid w-100">
+        </div>
+        <div class="col-sm-9">
+            <p>
+                {{selectedProduct.product_description|translate}}
+            </p>
+            <p>
+                {{selectedProduct.product_description_long|translate}}
+
+            </p>
+           
+        </div>
+   
+  </div>
+  <form  [formGroup]="form" (ngSubmit)="submit()">
+
+  <div class="accordion" id="accordion2">
+    <div *ngIf="selectedProduct.base.options" class="accordion-group my-3 pb-2 options-section ">
+      <div class="accordion-heading mb-3">
+        <a class="accordion-toggle" data-toggle="collapse" href="#collapseOne">
+          <span>{{'Base *Required Select 1' | translate}}</span>
+          <i class="fa fa-angle-down float-right"></i>
+        </a>
+      </div>
+      <div id="collapseOne" class="accordion-body collapse in show">
+        <div class="accordion-inner">
+            <label   *ngFor="let base of selectedProduct.base.options" class="checkbox-container">
+                <span class="option">{{base.name}}
+                    <span *ngIf="base.price>0"> ({{'currency'|translate}}{{base.price}} {{'Per head'|translate}})</span>
+
+                </span> 
+                <input checked required type="radio"   (change)="selectRequiredData(base)"  name="radio">
+                <span class="radio-checkmark"></span>
+              </label>
+          <!-- <label *ngFor="let base of selectedProduct.base.options" class="checkbox-container">
+            <span class="option">{{base.name}} ({{base.price}}$)</span>
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label> -->
+         </div>
+      </div>
+    </div>
+    <div *ngIf="selectedProduct.toppings.options" class="accordion-group my-3 pb-2 options-section">
+      <div class="accordion-heading mb-3">
+        <a class="accordion-toggle" data-toggle="collapse" href="#collapseTwo">
+          <span>{{'Toppings Select up to 2 (required)'|translate}}</span>
+          <i class="fa fa-angle-down float-right"></i>
+        </a>
+      </div>
+      <div id="collapseTwo" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <label formArrayName="toppingOrders" *ngFor="let topping of form.controls.toppingOrders.controls; let i = index" class="checkbox-container">
+                <span class="option">{{toppingOrders[i].name|translate}} 
+                    <span *ngIf="toppingOrders[i].price"> ({{'currency'|translate}}{{toppingOrders[i].price}} {{'Per head'|translate}})</span>
+
+                </span>
+                <input   (change)="getCheckboxValue(toppingOrders[i],$event)" type="checkbox" [formControlName]="i">
+                <span class="checkmark"></span>
+            </label>  
+            <span *ngIf="maxError" class="text-danger">max number of choices : 2</span>
+
+              <!-- <button [disabled]="!form.valid">submit</button> -->
+            </div>
+      </div>
+    </div>
+    <!-- <div class="accordion-group my-3 pb-2 options-section">
+      <div class="accordion-heading mb-3">
+        <a class="accordion-toggle" data-toggle="collapse" href="#collapseThree">
+          <span>Sauces *Required Select 1</span>
+          <i class="fa fa-angle-down float-right"></i>
+        </a>
+      </div>
+      <div id="collapseThree" class="accordion-body collapse">
+        <div class="accordion-inner">
+         
+              <label *ngFor="let sauce of selectedProduct.sauces.options" class="checkbox-container">
+                  <span class="option">{{sauce.name}} 
+                   <span *ngIf="sauce.price>0"> (${{sauce.price}} per head)</span>
+                  </span> 
+                  <input type="radio"  name="radio2">
+                  <span class="radio-checkmark"></span>
+                </label>
+          </div>
+      </div>
+    </div>
+    <div class="accordion-group my-3 pb-2 options-section">
+      <div class="accordion-heading mb-3">
+        <a class="accordion-toggle" data-toggle="collapse" href="#collapseFour">
+          <span>Extras Select up to 3 (Optional)</span>
+          <i class="fa fa-angle-down float-right"></i>
+        </a>
+      </div>
+      <div id="collapseFour" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <label formArrayName="extraOrders" *ngFor="let extra of form.controls.extraOrders.controls; let i = index" class="checkbox-container">
+                <span class="option">{{extraOrders[i].name}}
+                    <span *ngIf="extraOrders[i].price>0"> (${{extraOrders[i].price}} per head)</span>
+
+                </span>
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+        </div>
+      </div>
+    </div> -->
+    <div class="w-100 my-3 pb-2 options-section">
+      <h6>{{'Special Instructions'|translate}}</h6>
+      <textarea placeholder="{{'Write comments in case you want to add or exclude anything'|translate}}" class="w-100 comment"></textarea>
+    </div>
+    <div class="container">
+    <div class="row my-3 pb-2 ">
+        <div class="col-md-6">
+        <div *ngIf="!selectedProduct.base.options">{{selectedProduct.price_net*personsNumber}}</div>
+         <div *ngIf="selectedProduct.base.options">{{(totalPrice+totalSum)*personsNumber}}</div>
+         <div>{{'All prices are without VAT'|translate}}</div>  
+        </div>
+        <div class="col-md-6 text-right ">
+          
+          <input oninput="validity.valid||(value='');" [value]="personsNumber" (input)="personsNumber = $event.target.value;"   min="1" class="no-of-persons" type="number"> pers.
+          <button [disabled]="!form.valid" [ngClass]="{'disabled':!form.valid,'add-btn':form.valid}">{{'Add'|translate}}</button>
+
+        </div>
+
+    </div>
+  </div>
+  </div>
+</form>      
+
+</div>
